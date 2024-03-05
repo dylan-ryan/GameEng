@@ -24,6 +24,7 @@ public class UIManager : MonoBehaviour
         mainMenu.SetActive(false);
         pause.SetActive(true);
         gameplay.SetActive(false);
+        Time.timeScale = 0f;
     }
 
     public void ManagerGameplayUI()
@@ -33,5 +34,6 @@ public class UIManager : MonoBehaviour
         mainMenu.SetActive(false);
         pause.SetActive(false);
         gameplay.SetActive(true);
+        Time.timeScale = 1f;
     }
 }

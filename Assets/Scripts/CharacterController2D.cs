@@ -8,6 +8,7 @@ public class CharacterController2D : MonoBehaviour
     [SerializeField] Rigidbody2D rb;
     Vector2 movement;
     Animator animator;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
