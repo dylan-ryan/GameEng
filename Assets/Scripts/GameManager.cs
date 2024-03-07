@@ -12,11 +12,12 @@ public class GameManager : MonoBehaviour
     private UIManager uiManager;
     public LevelManager levelManager;
 
+    public GameObject spawn;
 
     public GameObject character;
     private SpriteRenderer characterArt;
 
-    public enum GameState {MainMenu,Pause,Gameplay}
+    public enum GameState {MainMenu,Pause,Gameplay,GameWin,GameOver,Options}
     public GameState gameState;
     public void Start()
     {
@@ -25,6 +26,11 @@ public class GameManager : MonoBehaviour
         characterController2D = GetComponent<CharacterController2D>();
         uiManager = GetComponent<UIManager>();
         levelManager = GetComponent<LevelManager>();
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        character.transform.position = GameObject.FindGameObjectWithTag("SpawnPoint").transform.position;
     }
     public void Update()
     {
@@ -38,6 +44,15 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.Gameplay:
                 GameplayUI();
+                break;
+            case GameState.GameWin:
+                GameWinUI();
+                break;
+            case GameState.GameOver:
+                GameOverUI();
+                break;
+            case GameState.Options:
+                OptionsUI();
                 break;
         }
 
@@ -71,5 +86,25 @@ public class GameManager : MonoBehaviour
         characterArt.enabled = true;
         character.GetComponent<CharacterController2D>().enabled = true;
 
+    }
+
+    public void GameWinUI()
+    {
+        uiManager.ManagerGameWinUI();
+        characterArt.enabled = false;
+        character.GetComponent<CharacterController2D>().enabled = false;
+    }
+
+    public void GameOverUI()
+    {
+        uiManager.ManagerGameOverUI();
+        characterArt.enabled = false;
+        character.GetComponent<CharacterController2D>().enabled = false;
+    }
+
+    public void OptionsUI()
+    {
+        uiManager.ManagerOptionsUI();
+        character.GetComponent<CharacterController2D>().enabled = false;
     }
 }
