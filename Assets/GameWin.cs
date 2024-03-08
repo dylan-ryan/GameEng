@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameWin : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class GameWin : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            SceneManager.LoadScene("GameOver");
             gameManager.gameState = GameManager.GameState.GameWin;
         }
     }

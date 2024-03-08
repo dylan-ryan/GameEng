@@ -21,6 +21,7 @@ public class GameLose : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            SceneManager.LoadScene("GameOver");
             gameManager.gameState = GameManager.GameState.GameOver;
         }
     }
